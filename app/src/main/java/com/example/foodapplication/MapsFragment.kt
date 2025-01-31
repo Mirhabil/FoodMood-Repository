@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import com.example.foodapplication.databinding.FragmentMapsBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -24,6 +25,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment() {
 
+    private lateinit var binding:FragmentMapsBinding
+
     private lateinit var map: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -36,8 +39,9 @@ class MapsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+    ): View {
+        binding=FragmentMapsBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,6 +53,11 @@ class MapsFragment : Fragment() {
         // Initialize map
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+        val adapterRestaurants=RestaurantsAdapter()
+        binding.recyclerView.adapter=adapterRestaurants
+        adapterRestaurants.getAdapterList(list)
+
+
     }
 
     private fun setupMap() {
@@ -65,9 +74,11 @@ class MapsFragment : Fragment() {
             LatLng(40.3728, 49.8382), // 7 Gözəl Restaurant
             LatLng(40.3758, 49.8463)  // Qaynana Restaurant
         )
-            restaurants.forEach {
+
+        restaurants.forEach {
             map.addMarker(MarkerOptions().position(it).title("Marker in Sydney").draggable(true))
         }
+
 
         map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney").draggable(true))
         map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
@@ -143,3 +154,35 @@ class MapsFragment : Fragment() {
         })
     }
 }
+
+val list:List<RestaurantsModel> = listOf<RestaurantsModel>(
+    RestaurantsModel(posterPath = "https://lh5.googleusercontent.com/p/AF1QipNJJHvsIpYDyCAl5KMcemAvbOeqnerTqc5ktK4-=w408-h285-k-no",
+        name = "By Ruslan Pizza - 28 May", open = true),
+    RestaurantsModel(posterPath = "https://lh5.googleusercontent.com/p/AF1QipNJJHvsIpYDyCAl5KMcemAvbOeqnerTqc5ktK4-=w408-h285-k-no",
+        name = "By Ruslan Pizza - 28 May", open = true),
+    RestaurantsModel(posterPath = "https://lh5.googleusercontent.com/p/AF1QipNJJHvsIpYDyCAl5KMcemAvbOeqnerTqc5ktK4-=w408-h285-k-no",
+        name = "By Ruslan Pizza - 28 May", open = true),
+    RestaurantsModel(posterPath = "https://lh5.googleusercontent.com/p/AF1QipNJJHvsIpYDyCAl5KMcemAvbOeqnerTqc5ktK4-=w408-h285-k-no",
+        name = "By Ruslan Pizza - 28 May", open = true),
+    RestaurantsModel(posterPath = "https://lh5.googleusercontent.com/p/AF1QipNJJHvsIpYDyCAl5KMcemAvbOeqnerTqc5ktK4-=w408-h285-k-no",
+        name = "By Ruslan Pizza - 28 May", open = true),
+    RestaurantsModel(posterPath = "https://lh5.googleusercontent.com/p/AF1QipNJJHvsIpYDyCAl5KMcemAvbOeqnerTqc5ktK4-=w408-h285-k-no",
+        name = "By Ruslan Pizza - 28 May", open = true)
+)
+
+val list2:List<CategoriesModel> = listOf<CategoriesModel>(
+    CategoriesModel(posterPath =  "https://lh5.googleusercontent.com/p/AF1QipNJJHvsIpYDyCAl5KMcemAvbOeqnerTqc5ktK4-=w408-h285-k-no",
+        name = "Dessert", placeCount = 269),
+    CategoriesModel(posterPath = "https://lh5.googleusercontent.com/p/AF1QipNJJHvsIpYDyCAl5KMcemAvbOeqnerTqc5ktK4-=w408-h285-k-no",
+        name = "Dessert", placeCount = 269),
+    CategoriesModel(posterPath = "https://lh5.googleusercontent.com/p/AF1QipNJJHvsIpYDyCAl5KMcemAvbOeqnerTqc5ktK4-=w408-h285-k-no",
+        name = "Dessert", placeCount = 269),
+    CategoriesModel(posterPath = "https://lh5.googleusercontent.com/p/AF1QipNJJHvsIpYDyCAl5KMcemAvbOeqnerTqc5ktK4-=w408-h285-k-no",
+        name = "Dessert", placeCount = 269),
+    CategoriesModel(posterPath = "https://lh5.googleusercontent.com/p/AF1QipNJJHvsIpYDyCAl5KMcemAvbOeqnerTqc5ktK4-=w408-h285-k-no",
+        name = "Dessert", placeCount = 269),
+    CategoriesModel(posterPath = "https://lh5.googleusercontent.com/p/AF1QipNJJHvsIpYDyCAl5KMcemAvbOeqnerTqc5ktK4-=w408-h285-k-no",
+        name = "Dessert", placeCount = 269)
+)
+
+
