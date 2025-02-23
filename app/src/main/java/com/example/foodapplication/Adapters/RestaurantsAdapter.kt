@@ -1,12 +1,13 @@
-package com.example.foodapplication
+package com.example.foodapplication.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.foodapplication.Models.RestaurantsModel
 import com.example.foodapplication.databinding.RestaurantsItemBinding
 
-class RestaurantsAdapter : RecyclerView.Adapter<RestaurantsViewHolder>() {
+class RestaurantsAdapter( val onClick :()->Unit) : RecyclerView.Adapter<RestaurantsViewHolder>() {
     var adapterList: List<RestaurantsModel> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantsViewHolder {
         return RestaurantsViewHolder(
@@ -32,6 +33,10 @@ class RestaurantsAdapter : RecyclerView.Adapter<RestaurantsViewHolder>() {
             binding.tvOpen.text = "Open"
         } else {
             binding.tvOpen.text = "Close"
+        }
+
+        binding.posterPath.setOnClickListener {
+            onClick()
         }
     }
 

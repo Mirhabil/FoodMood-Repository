@@ -1,11 +1,11 @@
-package com.example.foodapplication
+package com.example.foodapplication.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.foodapplication.Models.CategoriesModel
 import com.example.foodapplication.databinding.CategoriesItemBinding
-import com.example.foodapplication.databinding.RestaurantsItemBinding
 
 class CategoriesAdapter:RecyclerView.Adapter<CategoriesViewHolder>() {
 

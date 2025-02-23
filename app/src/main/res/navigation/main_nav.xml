@@ -3,16 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/categoriesSelectedFragment">
+    app:startDestination="@id/mapsFragment">
 
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.foodapplication.MapsFragment"
+        android:name="com.example.foodapplication.Fragments.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_restaurants_Details_Bottom_Sheet"
+            app:destination="@id/restaurants_Details_Bottom_Sheet" />
+    </fragment>
     <fragment
         android:id="@+id/categoriesSelectedFragment"
-        android:name="com.example.foodapplication.CategoriesSelectedFragment"
+        android:name="com.example.foodapplication.Fragments.CategoriesSelectedFragment"
         android:label="fragment_categories_selected"
         tools:layout="@layout/fragment_categories_selected" />
+    <dialog
+        android:id="@+id/restaurants_Details_Bottom_Sheet"
+        android:name="com.example.foodapplication.Restaurants_Details_Bottom_Sheet"
+        android:label="fragment_restaurants__details__bottom__sheet"
+        tools:layout="@layout/fragment_restaurants__details__bottom__sheet" >
+        <argument
+            android:name="placesResponse"
+            app:argType="com.example.foodapplication.Adapters.PlacesResponse" />
+        <action
+            android:id="@+id/action_restaurants_Details_Bottom_Sheet_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </dialog>
 </navigation>

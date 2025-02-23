@@ -1,4 +1,4 @@
-package com.example.foodapplication
+package com.example.foodapplication.Models
 
 class CategoriesModel (
     val posterPath:String,
